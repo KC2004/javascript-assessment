@@ -257,27 +257,27 @@
   With great power comes great responsibility. Go nuts.
 </p>
 
-
 <fieldset>
-  <form id="t-rex-form">
+  <div id="t-rex-img" class="t-rex-results"></div>
+  <div id="t-rex-response" class="t-rex-results"></div>
+  <div id="t-rex-casualties" class="t-rex-results"></div>
+</fieldset>
+
+  <form action="/t-rex-attack.json" id="t-rex-form" method="POST">
     You're about to launch a T-Rex attack on
     <input id="victim-name" type="text" name="victim-name" placeholder="Choose victim" required>
     <br>
     <input type="submit" id="Attack" value="Launch Attack!">
   </form>
-  <div id="t-rex-img" class="t-rex-results"></div>
-  <div id="t-rex-response" class="t-rex-results"></div>
-  <div id="t-rex-casualties" class="t-rex-results"></div>
-</fieldset>
 
 <script>
   "use strict";
 
   // NOTE: DO NOT CHANGE THE CODE OF THIS FUNCTION
   function showTRexResults(results) {
-
     //get the reaction string out of the results object
     var attackResult = results.reaction;
+
     var tRexURL = results.img;
 
     //create t-rex image element
@@ -288,13 +288,14 @@
 
     //clear and repopulate the appropriate spots
     $("#victim-name").val("");
-    $(".t-rex-results").empty();
+    $("#t-rex-results").empty();
     $("#t-rex-response").append(attackResult);
     $("#t-rex-casualties").append("Innocent bystanders harmed: " + numDead);
     $("#t-rex-img").append(tRexPhoto);
   }
 
   // put your code here
+  $("#attack").on("submit", showTRexResults);
 
 </script>
 
